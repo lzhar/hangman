@@ -1,0 +1,165 @@
+package main;
+
+import model.Cliente;
+
+import java.util.Scanner;
+
+public class Principal{
+  public static void main(String[] args){
+    Scanner leitura = new Scanner(System.in);
+    
+    System.out.println("Digite aqui o seu nome: ");
+    String nome = leitura.nextLine();
+    System.out.println("Digite aqui a sua idade: ");
+    int idade = leitura.nextInt();
+    System.out.println("Quanto voce gastou no debito esse mes: ");
+    double gastoDebito = leitura.nextDouble();
+    System.out.println("Quanto voce gastou no credito esse mes: ");
+    double gastoCredito = leitura.nextDouble();
+    
+    
+
+    Cliente cliente = new Cliente(nome, idade);
+    cliente.setContasDoCliente(gastoDebito, gastoCredito);
+    System.out.println("Esse mes você gastou "+cliente.getContasDoCliente());
+  }
+}
+
+___________________________________
+
+package model;
+
+public class Cliente{
+  private String nomeDoCliente;
+  private int idadeDoCliente;
+  private double saldoDoCliente;
+  private double limiteDoClienteCredito;
+  private double contasDoCliente;
+  
+  public Cliente(String nomeDoCliente, int idadeDoCliente){
+    this.nomeDoCliente = nomeDoCliente;
+    this.idadeDoCliente = idadeDoCliente;
+  }
+  
+  public void setNomeDoCliente(String nomeDoCliente){
+    this.nomeDoCliente = nomeDoCliente;
+  }
+  public String getNomeDoCliente(){
+    return nomeDoCliente;  
+  }
+  
+  public void setIdadeDoCliente(int idadeDoCliente){
+    this.idadeDoCliente = idadeDoCliente;
+  }
+  public int getIdadeDoCliente(){
+    return idadeDoCliente;
+  }
+
+  public void setSaldoDoCliente(double saldoDoCliente){
+    this.saldoDoCliente = saldoDoCliente;
+  }
+  public double getSaldoDoCliente(){
+    return saldoDoCliente;
+  }
+ 
+  public void setLimiteDoClienteCredito(){
+    if(this.idadeDoCliente < 18){
+      this.limiteDoClienteCredito = 0;
+    }else if(this.idadeDoCliente >= 18 && this.idadeDoCliente <= 25){
+      this.limiteDoClienteCredito = 2000;
+    }else if(this.idadeDoCliente > 25 && this.idadeDoCliente <= 35){
+      this.limiteDoClienteCredito = 3500;
+    }else{
+      this.limiteDoClienteCredito = 4000;
+    }
+  }
+  public double getLimiteDoClienteCredito(){
+    return limiteDoClienteCredito;
+  }
+  
+  public void setContasDoCliente(double quantiaUsadaNoDebito , double quantiaUsadaNoCredito){
+    this.contasDoCliente = quantiaUsadaNoDebito + quantiaUsadaNoCredito;
+  }
+  public double getContasDoCliente(){
+    return contasDoCliente;
+  }
+
+  
+  
+  
+}
+
+
+_______________________________________
+
+
+
+package model;
+
+import java.util.ArrayList;
+
+public class Quadrado {
+    private int tamanhoDoQuadrado;
+    private ArrayList<String> listaVertical = new ArrayList<String>();
+    private ArrayList<String> listaHorizontal = new ArrayList<String>();
+
+    public Quadrado(int tamanhoDoQuadrado){
+        this.tamanhoDoQuadrado = tamanhoDoQuadrado;
+    }
+
+
+    public void desenharQuadrado(){
+        for(int i = 0; i <= tamanhoDoQuadrado; i++){
+            if(i == 0){
+                ArrayList<String> lista = new ArrayList<String>();
+                for(int j = 0; j < tamanhoDoQuadrado; j++){
+                    lista.add("*");
+                }
+                for(int x = 0; x < lista.size(); x++){
+                    System.out.print(lista.get(x));
+                }
+            }else if(i == tamanhoDoQuadrado){
+                System.out.println();
+                ArrayList<String> lista = new ArrayList<String>();
+                for(int j = 0; j < tamanhoDoQuadrado; j++){
+                    lista.add("*");
+                }
+                for(int b = 0; b < lista.size(); b++){
+                    System.out.print(lista.get(b));
+                }
+            }
+            else{
+                System.out.println();
+                for(int x = 0; x <= tamanhoDoQuadrado; x++){
+                ArrayList<String> lista = new ArrayList<String>();
+                    if(x == 0 || x == tamanhoDoQuadrado){
+                        lista.add("*");
+                    }else{
+                        lista.add(" ");
+                    }
+                    for(int k = 0; k <= tamanhoDoQuadrado; k++){
+                        System.out.print(lista.get(k));
+                        break;
+                    }
+                }
+
+            }
+        }
+    }
+
+}
+
+
+________________________
+
+package main;
+
+import model.Quadrado;
+
+public class Principal{
+  public static void main(String[] args){
+    Quadrado quadrado = new Quadrado(1000000);
+    quadrado.desenharQuadrado();
+  }
+}
+
